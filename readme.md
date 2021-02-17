@@ -3,8 +3,8 @@
 Jeu...
 
 ## Mode de jeu :
-- Partie **privée** ( 10 personnes max)
-- Partie **publique** ( 2, 4, 6 personnes)
+- [x] Partie **privée** ( 10 personnes max)
+- [x] Partie **publique** ( 2, 4, 6 personnes)
 
 ## Règles :
 - Un nom d'acteur est donné par le jeu au premier joueur.
@@ -17,27 +17,27 @@ Jeu...
 - Les joueurs **ne peuvent pas répéter** un même nom d'acteur pendant **une même partie**.
 
 ## Règles techniques :
-- Minimum **2 mots** *(nom prénom / prénom nom)*
-- Afficher les **5 premiers acteurs** après le premier mot
+- [] Minimum **2 mots** *(nom prénom / prénom nom)*
+- [] Afficher les **5 premiers acteurs** après le premier mot
 
 ## Scénario du site :
 - **Page d'accueil :**
-    - **Logo** du jeu
-    - Bouton **"Commencer une partie"**
-    - Bouton **"Rejoindre une partie"**
-    - Bouton **"Règles"** => affiche une **Popup**
+    - [] **Logo** du jeu
+    - [x] Bouton **"Commencer une partie"**
+    - [x] Bouton **"Rejoindre une partie"**
+    - [x] Bouton **"Règles"** => affiche une **Popup**
 - **Choix du type** de partie :
     - **Publique** :
-        - Combien de joueur à chercher *(2, 4, 6 personnes)*
+        - [x] Combien de joueur à chercher *(2, 4, 6 personnes)*
     - **Privée** :
-        - **ID** de la partie
-        - **Joueurs présents** dans le salon
+        - [] **ID** de la partie
+        - [] **Joueurs présents** dans le salon
 - **Déroulement** de la partie :
-    - Afficher un **nom d'acteur aléatoire**
-    - **L'ordre des joueur** est déterminé **aléatoirement**
-    - **Phase** de jeu :
-        - **Input**
-        - **Validation**
-        - **Attente** de son tour
-        - **Perdu**
-        - **Gagné**
+    - [] Afficher un **nom d'acteur aléatoire**
+    - [] **L'ordre des joueur** est déterminé **aléatoirement**
+    - [] **Phase** de jeu :
+        - [] **Input**
+        - [] **Validation**
+        - [] **Attente** de son tour
+        - [] **Perdu**
+        - [] **Gagné**
