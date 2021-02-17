@@ -18,6 +18,7 @@ Jeu...
 
 ## Règles techniques :
 - Minimum **2 mots** *(nom prénom / prénom nom)*
+- Afficher les **5 premiers acteurs** après le premier mot
 
 ## Scénario du site :
 - **Page d'accueil :**
