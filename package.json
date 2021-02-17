@@ -1,0 +1,20 @@
+{
+  "name": "roland-filmos-tst",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Viliprant/roland-filmos-tst.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Viliprant/roland-filmos-tst/issues"
+  },
+  "homepage": "https://github.com/Viliprant/roland-filmos-tst#readme"
+}
