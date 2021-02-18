@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+main {
+  background-color: #fffeb8;
+  height: 100vh;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+}
+
+button {
+  outline: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.4rem;
+  border: none;
+  background-color: white;
+  color: var(--main-color);
+  -webkit-box-shadow: 2px 10px 0 2px rgba(0, 0, 0, 0.12);
+          box-shadow: 2px 10px 0 2px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+button#top-left-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+button#top-left-button > span.material-icons {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+button:active, button input[type="submit"]:active {
+  -webkit-box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12);
+          box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12);
+}
+
+button + button {
+  margin-top: 2rem;
+}
+
+button > span.material-icons {
+  font-size: 3rem;
+  margin-right: 1rem;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+input[type="submit"] {
+  color: #713045;
+  -webkit-box-shadow: 2px 10px 0 2px rgba(0, 0, 0, 0.12);
+          box-shadow: 2px 10px 0 2px rgba(0, 0, 0, 0.12);
+}
+
+#home {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 30%;
+  height: 100%;
+  width: 100%;
+}
+
+#home .logo {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#home h1 {
+  text-align: center;
+  color: var(--main-color);
+  font-size: 2.5rem;
+}
+
+#home #home-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 90%;
+}
+
+#type-wrapper {
+  display: none;
+}
+
+#form-party {
+  display: none;
+}
+
+#nb-player-wrapper {
+  display: none;
+}
