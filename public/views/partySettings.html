@@ -6,13 +6,13 @@
 
 <!-- Public or private -->
 <div id="type-wrapper">
-    <button type="button">
+    <button id="public" type="button">
         <span class="material-icons">
             public
         </span>
         <span>Partie publique</span>
     </button>
-    <button type="button">
+    <button id="private" type="button">
         <span class="material-icons">
             lock
         </span>
@@ -23,7 +23,7 @@
 <!-- Type your party ID -->
 <form id="form-party">
     <label for="id-party">ID Partie</label>
-    <input id="id-party" type="text"/>
+    <input id="id-party" type="text" maxlength="10"/>
     <input type="submit" value="Rejoindre"/>
 </form>
 

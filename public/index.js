@@ -1,7 +1,8 @@
 import Router from 'vanilla-router';
 import Home from './controllers/Home';
-import Lobby from './controllers/Lobby';
+import PartySettings from './controllers/PartySettings';
 import Game from './controllers/Game';
+import WaitingRoom from './controllers/WaitingRoom';
 
 let myRouter = new Router({
     mode: 'hash'
@@ -11,9 +12,16 @@ let myRouter = new Router({
 myRouter.add('/', function (name) {
     dispatchRoute(new Home());
 });
-/* Lobby */
-myRouter.add('/lobby/(:any)', function (param) {
-    dispatchRoute(new Lobby(param));
+/* Party Setting */
+myRouter.add('/partysettings/(:any)', function (param) {
+    dispatchRoute(new PartySettings(param));
+});
+/* Waiting Room */
+myRouter.add('/waitingroom/(:any)/(:any)', function (type, param) {
+    dispatchRoute(new WaitingRoom(type, param));
+});
+myRouter.add('/waitingroom/private', function () {
+    dispatchRoute(new WaitingRoom('private'));
 });
 /* Lobby */
 myRouter.add('/game', function () {

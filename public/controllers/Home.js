@@ -10,7 +10,7 @@ export default class Home {
         this.joinGameButton = document.querySelector("#join-game");
         this.startGameButton = document.querySelector("#start-game");
         
-        this.startGameButton.addEventListener('click', (evt) => redirect(evt, "#/lobby/partytype"));
-        this.joinGameButton.addEventListener('click', (evt) => redirect(evt, "#/lobby/join"));
+        this.startGameButton.addEventListener('click', (evt) => redirect(evt, "#/partySettings/partytype"), {once : true});
+        this.joinGameButton.addEventListener('click', (evt) => redirect(evt, "#/partySettings/join"), {once : true});
     }
 }

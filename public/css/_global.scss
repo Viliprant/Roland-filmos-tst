@@ -13,6 +13,7 @@ main{
     width: 100%;
     font-family: sans-serif;
     font-size: 1.5rem;
+    color: $main-color;
 }
 
 button{
@@ -66,6 +67,7 @@ input{
     background-color: white;
 
     &[type="submit"]{
+        outline: none;
         color: $main-color;
         box-shadow: 2px 10px 0 2px rgba(0,0,0,0.12);
     }
