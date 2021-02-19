@@ -2,6 +2,13 @@ const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
+const helmet = require('helmet');
+var cors = require('cors');
+
+const socketListeners = require('./RealTime/socketListeners.js');
+
+const UserService = require('./RealTime/services/UserService.js')
+
 // Creates an ExpressJS compatible Feathers application
 const app = express(feathers());
 
@@ -14,11 +21,30 @@ app.use(express.static(`${__dirname}/public`));
 // Add REST API support
 app.configure(express.rest());
 // Configure Socket.io real-time APIs
-app.configure(socketio());
+app.configure(socketio((io) => {
+  io.use(function (socket, next) {
+    socket.feathers.connectionID = socket.client.id;
+    socket.feathers.payload = socket.handshake.query.payload;
+    socket.feathers.username = socket.handshake.query.username;
+    next();
+  });
+}));
 
+app.use(helmet());
+app.use(cors());
 
-// Register an in-memory messages service
-// app.use('/messages', new MessageService());
+app.use('/users', new UserService());
+
+socketListeners(app);
+
+// Envoie uniquement à la personne connectée
+app.service('users').publish('created', (data, context) => {
+    return [
+          app.channel(app.channels).filter(connection =>
+              connection.payload === context.data.payload
+          )
+    ];
+});
 
 app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/public/views/home.html`)
