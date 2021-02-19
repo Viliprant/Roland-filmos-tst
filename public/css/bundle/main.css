@@ -190,9 +190,8 @@ ul {
       -ms-flex-direction: column;
           flex-direction: column;
   position: absolute;
-  top: 0;
   left: 0;
-  bottom: 200%;
+  bottom: 100%;
   right: 0;
   margin: auto;
   height: 100vh;
@@ -210,6 +209,7 @@ ul {
 
 #home #rules.show {
   bottom: 0;
+  top: 0;
 }
 
 #home #rules ul {
