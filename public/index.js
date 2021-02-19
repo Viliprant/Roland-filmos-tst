@@ -5,6 +5,7 @@ import Game from './controllers/Game';
 import WaitingRoom from './controllers/WaitingRoom';
 
 // MOBILE HEIGHT (URL BAR)
+const app = document.querySelector("#app");
 app.style.height = `${window.innerHeight}px`;
 
 window.onresize = () => {
