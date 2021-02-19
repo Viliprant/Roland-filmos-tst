@@ -8,10 +8,6 @@ import WaitingRoom from './controllers/WaitingRoom';
 const appli = document.querySelector("#app");
 appli.style.height = `${window.innerHeight}px`;
 
-window.onresize = () => {
-    appli.style.height = `${window.innerHeight}px`;
-};
-
 let myRouter = new Router({
     mode: 'hash'
 });
