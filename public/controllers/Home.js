@@ -35,7 +35,7 @@ export default class Home {
         this.usernameSpan.addEventListener('click', (evt) => {
             evt.preventDefault();
             this.usernameSpan.style.display = 'none';
-            this.usernameForm.style.display = 'block';
+            this.usernameForm.style.display = 'flex';
             this.usernameInput.focus();
         })
         this.usernameForm.addEventListener('submit', (evt) => {
