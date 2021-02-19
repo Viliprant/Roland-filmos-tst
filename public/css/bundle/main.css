@@ -105,7 +105,7 @@ input[type="submit"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-bottom: 30%;
+  padding-bottom: 4em;
   height: 100%;
   width: 100%;
 }
