@@ -4,6 +4,13 @@ import PartySettings from './controllers/PartySettings';
 import Game from './controllers/Game';
 import WaitingRoom from './controllers/WaitingRoom';
 
+// MOBILE HEIGHT (URL BAR)
+app.style.height = `${window.innerHeight}px`;
+
+window.onresize = () => {
+    app.style.height = `${window.innerHeight}px`;
+};
+
 let myRouter = new Router({
     mode: 'hash'
 });
