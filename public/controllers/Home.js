@@ -50,5 +50,18 @@ export default class Home {
 
             setUsername(this.username);
         })
+        this.usernameForm.addEventListener('focusout', (evt) => {
+            evt.preventDefault();
+            
+            const formData = new FormData(evt.currentTarget);
+
+            this.usernameSpan.style.display = 'block';
+            this.usernameForm.style.display = 'none';
+
+            this.username = formData.get('username').trim();
+            this.usernameSpan.textContent = this.username;
+
+            setUsername(this.username);
+        })
     }
 }
