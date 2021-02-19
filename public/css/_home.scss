@@ -26,7 +26,7 @@
             background-size: contain;
         }
     }
-        h1{
+        & > h1{
             text-align: center;
             color: var(--main-color);
             font-size: 2.5rem;
@@ -45,5 +45,39 @@
         flex-direction: column;
         justify-content: center;
         width: 90%;
+    }
+
+    #rules{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 200%;
+        right: 0;
+        margin: auto;
+        height: 100vh;
+        width: 100vw;
+        
+        background-color: $secondary-bg-color;
+        transition: all 0.3s ease-in-out;
+        border-radius: 5px;
+        overflow: hidden;
+
+        & > h1{
+            padding: 1rem;
+        }
+        &.show{
+            bottom: 0;
+        }
+        & ul{
+            font-size: 0.9em;
+            height: inherit;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
     }
 }

@@ -7,7 +7,7 @@ Jeu...
 - [x] Partie **publique** ( 2, 4, 6 personnes)
 
 ## Règles :
-- Un nom d'acteur est donné par le jeu au premier joueur.
+- **Un nom d'acteur est donné** par le jeu au premier joueur.
 - Le premier joueur doit saisir le nom d'un acteur **ayant joué avec ce dernier**.
 - Le joueur suivant doit saisir le nom d'un acteur ayant joué **avec le dernier acteur cité**, et *ainsi de suite ...*
 - Le joueur qui **ne trouve plus d'acteur** ou qui **se trompe** est **éliminé** de la partie.
