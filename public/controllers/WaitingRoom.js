@@ -1,4 +1,5 @@
 import {redirect} from '../utilities/routerUtilities';
+import random from 'string-random';
 
 export default class WaitingRoom {
     constructor(type, param) {
@@ -16,14 +17,13 @@ export default class WaitingRoom {
         if(this.type === 'private'){
             if(!this.idParty){
                 // TODO: Créer une partie
-    
+                this.idParty = random(6).toLowerCase();
             }
             else{
                 // TODO: Vérifier l'ID
-                this.idPartyDOM.textContent = `#${this.idParty}`
                 // TODO: Rejoindre une partie privée
-                
             }
+            this.idPartyDOM.textContent = `#${this.idParty}`
         }
         else if(this.type ===  'public'){
             // TODO: Rejoindre une partie public
