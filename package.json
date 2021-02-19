@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-js": "webpack",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "webpack & node app.js",
+    "dev": "webpack & nodemon app.js"
   },
   "repository": {
     "type": "git",
