@@ -168,6 +168,10 @@ ul {
 
 #home #username-form {
   display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
   overflow: hidden;
 }
