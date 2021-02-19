@@ -162,10 +162,14 @@ ul {
   text-align: center;
   font-weight: bold;
   padding: 1rem;
+  width: 100%;
+  overflow: hidden;
 }
 
 #home #username-form {
   display: none;
+  width: 100%;
+  overflow: hidden;
 }
 
 #home #home-menu {
