@@ -10,14 +10,36 @@
     .logo{
         flex: 1;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-top: 5rem;
+
+        & > .logo-img{
+            margin-bottom: 1rem;
+            font-size: 5rem;
+            height: 100px;
+            width: 100px;
+            background-image: url("../../assets/tennis.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
     }
         h1{
             text-align: center;
             color: var(--main-color);
             font-size: 2.5rem;
         }
+
+    #username-wrapper{
+        text-align: center;
+        font-weight: bold;
+        padding: 1rem;
+    }
+    #username-form{
+        display: none;
+    }
     #home-menu{
         display: flex;
         flex-direction: column;

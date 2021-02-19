@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Viliprant/roland-filmos-tst#readme",
   "dependencies": {
     "lodash": "^4.17.20",
+    "string-random": "^0.1.3",
     "vanilla-router": "^1.2.8"
   },
   "devDependencies": {
