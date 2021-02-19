@@ -213,7 +213,7 @@ ul {
 }
 
 #home #rules ul {
-  font-size: 0.9em;
+  font-size: 0.7em;
   height: inherit;
   overflow-y: auto;
   -webkit-box-flex: 1;
@@ -226,8 +226,11 @@ ul {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  padding-top: 1rem;
+}
+
+#home #rules ul > li + li {
+  margin-top: 1rem;
 }
 
 #type-wrapper {
