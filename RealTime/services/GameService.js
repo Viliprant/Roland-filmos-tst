@@ -8,11 +8,13 @@ module.exports = class GameService{
     async find(params) {
         return [];
     }
-    async get(id, params) {}
+    async get(id, params) {
+        return this.games[id];
+    }
     async create(data, params) {
         const newGame = new Game(data.id, data.userPayload, data.type, data.nbMaxPlayers);
 
-        this.games.push(newGame);
+        this.games[newGame.id] = newGame;
 
         return newGame;
     }

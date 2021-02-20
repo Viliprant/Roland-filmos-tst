@@ -42,12 +42,11 @@ export default class PartySettings {
         this.privateButton = document.querySelector("#private");
 
         this.publicButton.addEventListener('click', (evt) => {
-            // redirect(evt, "#/partySettings/optionsparty");
+            redirect(evt, "#/partySettings/optionsparty");
         }, {once : true});
         this.privateButton.addEventListener('click', async (evt) => {
             const newGame = await SocketIOClient.service('games').create({})
-            console.log(newGame);
-            // redirect(evt, "#/waitingroom/private")
+            redirect(evt, `#/waitingroom/private/${newGame.id}`)
         }, {once : true});
     }
     handleOptionsParty(){

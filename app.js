@@ -55,13 +55,17 @@ app.service('games').hooks({
       create(context) {
         const params = context.params;
         if(Object.keys(params).length > 0){ // mean that from client
+            const id = random(process.env.NB_STR_ID);
             context.data = {
-                id: random(process.env.NB_STR_ID),
+                id,
                 owner: params.payload.payload,
                 nbMaxPlayers: process.env.NB_PLAYER_MAX,
                 type: 'private',
             }
+
+            context.app.channel(id).join(context.params.connection);
         }
+
         return context;
       }
     }

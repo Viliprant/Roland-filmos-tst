@@ -31,9 +31,6 @@ myRouter.add('/partysettings/(:any)', function (param) {
 myRouter.add('/waitingroom/(:any)/(:any)', function (type, param) {
     dispatchRoute(new WaitingRoom(type, param));
 });
-myRouter.add('/waitingroom/private', function () {
-    dispatchRoute(new WaitingRoom('private'));
-});
 /* Lobby */
 myRouter.add('/game', function () {
     dispatchRoute(new Game());

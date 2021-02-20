@@ -5,5 +5,6 @@ module.exports = class Game{
         this.type = type;
         this.nbMaxPlayers = nbMaxPlayers;
         this.mentionnedActors = [];
+        this.participants = [];
     }
 }

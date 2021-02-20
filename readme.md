@@ -44,7 +44,15 @@ Jeu...
 
 ## TODO:
 - [x] **Séparer** `SocketIO client` dans un fichier à part (factoriser)
-- [] **Créer** une partie privée
+- [x] **Créer** une partie privée
 - [] **Rejoindre** une partie `privée`
+    - [x] Créer un channel
+    - [] Adapter l'interface web
 - [] **Rejoindre** une partie `publique`
-- [] **Vérifier** qui sont les destinataires des `events`
+- [x] **Vérifier** qui sont les destinataires des `events`
+- [] Elements imprévus
+    - [] Deconnexion User
+    - [] Retour accueil User
+- [] A la fin d'une partie
+    - [] Supprimer le channel
+    - [] Supprimer le game du service

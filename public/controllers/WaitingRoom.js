@@ -1,35 +1,30 @@
 import {redirect} from '../utilities/routerUtilities';
-import random from 'string-random';
+import SocketIOClient from '../socketClient';
 
 export default class WaitingRoom {
-    constructor(type, param) {
+    constructor(type, id) {
         this.view = 'waitingRoom.html';
         this.type = type;
-        this.idParty = param;
+        this.game = { id }
     }
 
     init() {
         this.homeButton = document.querySelector("#top-left-button");
         this.idPartyDOM = document.querySelector("#id-party");
 
-        this.homeButton.addEventListener('click', (evt) => redirect(evt, "#"), {once : true});
+        SocketIOClient.service('games').get(this.game.id)
+            .then(game => {
+                if(game){
+                    this.game = game;
+                    this.idPartyDOM.textContent = `#${this.game.id}`
+                    console.log(this.game);
+                }
+                else{
+                    window.location = '#/partysettings/partytype';
+                }
+            })
 
-        if(this.type === 'private'){
-            if(!this.idParty){
-                // TODO: Créer une partie
-                this.idParty = random(6).toLowerCase();
-            }
-            else{
-                // TODO: Vérifier l'ID
-                // TODO: Rejoindre une partie privée
-            }
-            this.idPartyDOM.textContent = `#${this.idParty}`
-        }
-        else if(this.type ===  'public'){
-            // TODO: Rejoindre une partie public
-        }
-        else{
-            window.location.replace("#")
-        }
+
+        this.homeButton.addEventListener('click', (evt) => redirect(evt, "#"), {once : true});
     }
 }
