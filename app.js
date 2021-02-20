@@ -43,7 +43,6 @@ socketListeners(app);
 
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
-  console.log(data);
     return [
         app.channel(app.channels).filter(connection =>
             connection.payload === context.data.payload
@@ -73,7 +72,7 @@ app.service('games').hooks({
         const params = context.params;
         const data = context.result;
         const userID = params.payload.id;
-        
+
         if(data){
           const isAlreadyInGame = data.participants.find( participant => participant === userID);
           const isFull = data.authorizedIDs.length >= data.nbMaxPlayers;
@@ -83,6 +82,7 @@ app.service('games').hooks({
             context.result = {UnauthorizedAccess: true};
           }
           else{
+
             context.result = await context.app.service('games').update(data.id, {
               ...data,
               participants: [...data.participants, userID],
@@ -98,15 +98,36 @@ app.service('games').hooks({
                 }
             }
 
-            console.log('usernames', usernames);
-            context.result.participants = usernames;
-            console.log('result', context);
+            const {authorizedIDs, ...safeData} = data;
+
+            context.dispatch = {
+              ...safeData,
+              participants: usernames,
+            };
 
             context.app.channel(`game/${data.id}`).join(params.connection);  
           }
         }
+      },
+      async update(context){
+        const data = context.result;
+        const participants = context.result.participants;
+        const usernames = [];
 
-        return context;
+        const {authorizedIDs, ...safeData} = data;
+
+
+        for (const userID of participants) {
+            const user = await context.app.service('users').get(userID);
+            if(user){
+              usernames.push(user.username);
+            }
+        }
+
+        context.dispatch = {
+          ...safeData,
+          participants: usernames,
+        };
       }
     }
 });

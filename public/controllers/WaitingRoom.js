@@ -16,6 +16,7 @@ export default class WaitingRoom {
         SocketIOClient.service('games').get(this.game.id)
             .then(game => {
                 if(game && !game.UnauthorizedAccess){
+                    console.log(game);
                     this.game = game;
                     this.handleWaitingRoom();
                 }
