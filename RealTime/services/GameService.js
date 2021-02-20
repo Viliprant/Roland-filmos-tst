@@ -18,7 +18,18 @@ module.exports = class GameService{
 
         return newGame;
     }
-    async update(id, data, params) {}
+    async update(id, data, params) {
+        const game = this.games[id];
+        
+        if(game){
+            this.games[id] = {
+                ...game,
+                ...data,
+            };
+        }
+
+        return this.games[id];
+    }
     async patch(id, data, params) {}
     async remove(id, params) {}
     setup(app, path) {}

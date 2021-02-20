@@ -17,8 +17,7 @@ export default class WaitingRoom {
             .then(game => {
                 if(game && !game.UnauthorizedAccess){
                     this.game = game;
-                    this.idPartyDOM.textContent = `#${this.game.id}`
-                    console.log(this.game);
+                    this.handleWaitingRoom();
                 }
                 else{
                     window.location = '#/partysettings/partytype';
@@ -26,5 +25,11 @@ export default class WaitingRoom {
             })
 
         this.homeButton.addEventListener('click', (evt) => redirect(evt, "#"), {once : true});
+    }
+
+    handleWaitingRoom(){
+        this.idPartyDOM.textContent = `#${this.game.id}`
+        console.log(this.game);
+        // SocketIOClient.service('games').
     }
 }

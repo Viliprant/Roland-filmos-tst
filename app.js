@@ -76,7 +76,7 @@ app.service('games').hooks({
 
         return context;
       },
-      get(context){
+      async get(context){
         const params = context.params;
         const data = context.result;
         const userID = params.payload.payload;
@@ -88,6 +88,12 @@ app.service('games').hooks({
           if(isAlreadyInGame || isFull)
           {
             context.result = {UnauthorizedAccess: true};
+          }
+          else{
+            context.result = await context.app.service('games').update(data.id, {
+              ...data,
+              participants: [...data.participants, userID],
+            })
           }
         }
 
