@@ -14,8 +14,6 @@ module.exports =  (app) => {
             connection.payload = JSON.parse(connection.payload);
         }
 
-        //TODO: Event create
-        //TODO: Event join public
-        //TODO: Event join private
+        app.on('myevent', data => console.log('myevent happened', data));
     });
 }

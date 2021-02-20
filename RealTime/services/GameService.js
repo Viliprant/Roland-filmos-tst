@@ -12,7 +12,7 @@ module.exports = class GameService{
         return this.games[id];
     }
     async create(data, params) {
-        const newGame = new Game(data.id, data.userPayload, data.type, data.nbMaxPlayers);
+        const newGame = new Game(data.id, data.owner, data.type, data.nbMaxPlayers);
 
         this.games[newGame.id] = newGame;
 

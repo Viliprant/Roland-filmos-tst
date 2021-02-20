@@ -9,6 +9,7 @@ const socketListeners = require('./RealTime/socketListeners.js');
 
 const UserService = require('./RealTime/services/UserService.js')
 const GameService = require('./RealTime/services/GameService.js');
+const AuthorizationService = require('./RealTime/services/AuthorizationService');
 const random  = require('string-random');
 
 // Creates an ExpressJS compatible Feathers application
@@ -38,6 +39,7 @@ require('dotenv').config()
 
 app.use('/users', new UserService());
 app.use('/games', new GameService());
+app.use('/authorizations', new AuthorizationService());
 
 socketListeners(app);
 
@@ -50,20 +52,50 @@ app.service('users').publish('created', (data, context) => {
     ];
 });
 
+app.service('authorizations').hooks({
+    before: {
+      async create(context) {
+        const data = context.data;
+        const userID = JSON.parse(data.userID).payload;
+
+        const ressource = await context.app.service(data.serviceName).get(data.ressourceID);
+        if(ressource){
+          const isAlreadyInGame = ressource.participants.find( participant => participant === userID);
+          const isFull = ressource.authorizedIDs.length >= ressource.nbMaxPlayers;
+
+          if(!isAlreadyInGame || !isFull)
+          {
+            context.data.isAuthorized = true;
+          }
+        }
+        
+        return context;
+      }
+    }
+})
+
 app.service('games').hooks({
     before: {
       create(context) {
         const params = context.params;
         if(Object.keys(params).length > 0){ // mean that from client
-            const id = random(process.env.NB_STR_ID);
+            const id = random(process.env.NB_STR_ID).toLowerCase();
             context.data = {
                 id,
                 owner: params.payload.payload,
                 nbMaxPlayers: process.env.NB_PLAYER_MAX,
                 type: 'private',
             }
+        }
 
-            context.app.channel(id).join(context.params.connection);
+        return context;
+      }
+    },
+    after: {
+      create(context) {
+        const params = context.params;
+        if(Object.keys(params).length > 0){
+          context.app.channel(context.data.id).join(params.connection);  
         }
 
         return context;
@@ -81,5 +113,3 @@ app.use(express.errorHandler());
 app.listen(process.env.PORT || 3030).on('listening', () =>
   console.log(`Feathers server listening ${process.env.PORT || 3030}`)
 );
-
-app.service('games').create({})
