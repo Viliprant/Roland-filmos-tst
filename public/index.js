@@ -15,10 +15,6 @@ let myRouter = new Router({
     mode: 'hash'
 });
 
-SocketIOClient.service('users').on('created', (payload) => {
-    setPayload(payload);
-});
-
 /* Accueil */
 myRouter.add('/', function (name) {
     dispatchRoute(new Home());

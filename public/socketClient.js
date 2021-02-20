@@ -1,17 +1,31 @@
-import {getUsername, getPayload} from './utilities/localstorageUtilities';
+import {getUsername, getPayload, setPayload} from './utilities/localstorageUtilities';
 
 const io = require('socket.io-client');
 const feathers = require('@feathersjs/feathers');
 const socketio = require('@feathersjs/socketio-client');
 
-const socket = io('', {
-    query: {
-      username: getUsername(),
-      payload: getPayload()
-    }
-});
+async function setSocketIOClient(){
+  const client = feathers();
 
-const client = feathers();
-client.configure(socketio(socket));
+  if(getPayload() == '')
+  {
+    const id = await (await fetch(`${location.origin}/user`, {method: 'POST'})).json();
+    setPayload(id);
+  }
 
-export default client;
+  const socket = io('', {
+      query: {
+        username: getUsername(),
+        payload: getPayload()
+      }
+  });
+
+  console.log(getUsername());
+  console.log(getPayload());
+
+  client.configure(socketio(socket));
+
+  return client;
+}
+
+export default setSocketIOClient();

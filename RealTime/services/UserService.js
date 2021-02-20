@@ -8,10 +8,12 @@ module.exports = class UserService{
     async find(params) {
         return [];
     }
-    async get(id, params) {}
+    async get(id, params) {
+        return this.users[id];
+    }
     async create(data, params) {
         const id = data.payload;
-        
+
         const user = new User(id, data.username)
 
         this.users.push(user);

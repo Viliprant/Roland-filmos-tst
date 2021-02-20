@@ -58,7 +58,7 @@ app.service('games').hooks({
             const id = random(process.env.NB_STR_ID).toLowerCase();
             context.data = {
                 id,
-                owner: params.payload.payload,
+                owner: params.payload.id,
                 nbMaxPlayers: process.env.NB_PLAYER_MAX,
                 type: 'private',
             }
@@ -71,7 +71,7 @@ app.service('games').hooks({
       async get(context){
         const params = context.params;
         const data = context.result;
-        const userID = params.payload.payload;
+        const userID = params.payload.id;
         
         if(data){
           const isAlreadyInGame = data.participants.find( participant => participant === userID);
@@ -86,6 +86,18 @@ app.service('games').hooks({
               ...data,
               participants: [...data.participants, userID],
             })
+
+            const participants = context.result.participants;
+            console.log(participants);
+            // const usernames = participants.map(async participantID => {
+            //     // console.log(participantID);
+            //     const username = await context.app.service('users').get(participantID);
+
+            //     return username;
+            // });
+
+            // console.log(usernames);
+
             context.app.channel(`game/${data.id}`).join(params.connection);  
           }
         }
@@ -97,13 +109,20 @@ app.service('games').hooks({
 
 
 app.service('games').publish('updated', (data, context) => {
-  console.log(data);
   return app.channel(`game/${data.id}`);
 });
 
 app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/public/views/home.html`)
 })
+app.post('/user', async (req, res) => {
+  const id = random(10);
+  const newUser = await app.service('users').create({
+      payload: id
+  });
+  res.json(newUser);
+})
+
 // Register a nicer error handler than the default Express one
 app.use(express.errorHandler());
 
