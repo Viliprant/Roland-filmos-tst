@@ -1,17 +1,17 @@
 const random = require('string-random');
 
 module.exports =  (app) => {
-    app.on('connection', connection => {
+    app.on('connection', async connection => {
         app.channel('everybody').join(connection);
 
-        if(!connection.payload){
-            connection.payload = random(10);
+        connection.payload = JSON.parse(connection.payload);
+
+        const isExisting = await app.service('users').get(connection.payload.id);
+        
+        if(!isExisting){
             app.service('users').create({
-                payload: connection.payload
+                payload: connection.payload.id
             });
-        }
-        else{
-            connection.payload = JSON.parse(connection.payload);
         }
     });
 }

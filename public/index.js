@@ -7,6 +7,10 @@ import WaitingRoom from './controllers/WaitingRoom';
 import {setPayload} from './utilities/localstorageUtilities';
 import SocketIOClient from './socketClient';
 
+SocketIOClient.service('users').on('created', (user) => {
+    console.log(user);
+})
+
 // MOBILE HEIGHT (URL BAR)
 const appli = document.querySelector("#app");
 appli.style.height = `${window.innerHeight}px`;

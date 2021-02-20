@@ -9,6 +9,7 @@ module.exports = class GameService{
         return [];
     }
     async get(id, params) {
+        console.log('get', this.games[id]);
         return this.games[id];
     }
     async create(data, params) {
@@ -28,6 +29,7 @@ module.exports = class GameService{
             };
         }
 
+        console.log('updated', this.games[id]);
         return this.games[id];
     }
     async patch(id, data, params) {}

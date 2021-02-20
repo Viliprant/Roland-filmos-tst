@@ -43,6 +43,7 @@ socketListeners(app);
 
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
+  console.log(data);
     return [
         app.channel(app.channels).filter(connection =>
             connection.payload === context.data.payload
@@ -88,15 +89,18 @@ app.service('games').hooks({
             })
 
             const participants = context.result.participants;
-            console.log(participants);
-            // const usernames = participants.map(async participantID => {
-            //     // console.log(participantID);
-            //     const username = await context.app.service('users').get(participantID);
+            console.log('participants', participants);
+            const usernames = [];
+            for (const userID of participants) {
+                const user = await context.app.service('users').get(userID);
+                if(user){
+                  usernames.push(user.username);
+                }
+            }
 
-            //     return username;
-            // });
-
-            // console.log(usernames);
+            console.log('usernames', usernames);
+            context.result.participants = usernames;
+            console.log('result', context);
 
             context.app.channel(`game/${data.id}`).join(params.connection);  
           }
@@ -120,7 +124,7 @@ app.post('/user', async (req, res) => {
   const newUser = await app.service('users').create({
       payload: id
   });
-  res.json(newUser);
+  res.json({id: newUser.id});
 })
 
 // Register a nicer error handler than the default Express one
