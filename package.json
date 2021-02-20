@@ -24,6 +24,7 @@
     "@feathersjs/socketio": "^4.5.11",
     "@feathersjs/socketio-client": "^4.5.11",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "helmet": "^4.4.1",
     "lodash": "^4.17.20",
     "socket.io-client": "^2.4.0",

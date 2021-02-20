@@ -4,11 +4,8 @@ import PartySettings from './controllers/PartySettings';
 import Game from './controllers/Game';
 import WaitingRoom from './controllers/WaitingRoom';
 
-import {getUsername, getPayload, setPayload} from './utilities/localstorageUtilities';
-
-const io = require('socket.io-client');
-const feathers = require('@feathersjs/feathers');
-const socketio = require('@feathersjs/socketio-client');
+import {setPayload} from './utilities/localstorageUtilities';
+import SocketIOClient from './socketClient';
 
 // MOBILE HEIGHT (URL BAR)
 const appli = document.querySelector("#app");
@@ -18,17 +15,7 @@ let myRouter = new Router({
     mode: 'hash'
 });
 
-// SOCKETIO
-const socket = io('', {
-    query: {
-      username: getUsername(),
-      payload: getPayload()
-    }
-});
-const client = feathers();
-client.configure(socketio(socket));
-
-client.service('users').on('created', (payload) => {
+SocketIOClient.service('users').on('created', (payload) => {
     setPayload(payload);
 });
 

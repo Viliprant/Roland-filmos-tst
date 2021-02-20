@@ -1,4 +1,5 @@
 import {redirect} from '../utilities/routerUtilities';
+import SocketIOClient from '../socketClient';
 
 export default class PartySettings {
     constructor(param) {
@@ -40,8 +41,14 @@ export default class PartySettings {
         this.publicButton = document.querySelector("#public");
         this.privateButton = document.querySelector("#private");
 
-        this.publicButton.addEventListener('click', (evt) => redirect(evt, "#/partySettings/optionsparty"), {once : true});
-        this.privateButton.addEventListener('click', (evt) => redirect(evt, "#/waitingroom/private"), {once : true});
+        this.publicButton.addEventListener('click', (evt) => {
+            // redirect(evt, "#/partySettings/optionsparty");
+        }, {once : true});
+        this.privateButton.addEventListener('click', async (evt) => {
+            const newGame = await SocketIOClient.service('games').create({})
+            console.log(newGame);
+            // redirect(evt, "#/waitingroom/private")
+        }, {once : true});
     }
     handleOptionsParty(){
         this.nbPlayerWrapper.style.display = "flex";

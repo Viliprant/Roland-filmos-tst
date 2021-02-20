@@ -13,5 +13,9 @@ module.exports =  (app) => {
         else{
             connection.payload = JSON.parse(connection.payload);
         }
+
+        //TODO: Event create
+        //TODO: Event join public
+        //TODO: Event join private
     });
 }

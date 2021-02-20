@@ -30,7 +30,7 @@ Jeu...
     - **Publique** :
         - [x] Combien de joueur à chercher *(2, 4, 6 personnes)*
     - **Privée** :
-        - [] **ID** de la partie
+        - [x] **ID** de la partie
         - [] **Joueurs présents** dans le salon
 - **Déroulement** de la partie :
     - [] Afficher un **nom d'acteur aléatoire**
@@ -41,3 +41,10 @@ Jeu...
         - [] **Attente** de son tour
         - [] **Perdu**
         - [] **Gagné**
+
+## TODO:
+- [x] **Séparer** `SocketIO client` dans un fichier à part (factoriser)
+- [] **Créer** une partie privée
+- [] **Rejoindre** une partie `privée`
+- [] **Rejoindre** une partie `publique`
+- [] **Vérifier** qui sont les destinataires des `events`

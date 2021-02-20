@@ -8,6 +8,8 @@ var cors = require('cors');
 const socketListeners = require('./RealTime/socketListeners.js');
 
 const UserService = require('./RealTime/services/UserService.js')
+const GameService = require('./RealTime/services/GameService.js');
+const random  = require('string-random');
 
 // Creates an ExpressJS compatible Feathers application
 const app = express(feathers());
@@ -32,18 +34,37 @@ app.configure(socketio((io) => {
 
 app.use(helmet());
 app.use(cors());
+require('dotenv').config()
 
 app.use('/users', new UserService());
+app.use('/games', new GameService());
 
 socketListeners(app);
 
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
     return [
-          app.channel(app.channels).filter(connection =>
-              connection.payload === context.data.payload
-          )
+        app.channel(app.channels).filter(connection =>
+            connection.payload === context.data.payload
+        )
     ];
+});
+
+app.service('games').hooks({
+    before: {
+      create(context) {
+        const params = context.params;
+        if(Object.keys(params).length > 0){ // mean that from client
+            context.data = {
+                id: random(process.env.NB_STR_ID),
+                owner: params.payload.payload,
+                nbMaxPlayers: process.env.NB_PLAYER_MAX,
+                type: 'private',
+            }
+        }
+        return context;
+      }
+    }
 });
 
 app.get('/', (req, res) => {
@@ -56,3 +77,5 @@ app.use(express.errorHandler());
 app.listen(process.env.PORT || 3030).on('listening', () =>
   console.log(`Feathers server listening ${process.env.PORT || 3030}`)
 );
+
+app.service('games').create({})
