@@ -7,5 +7,8 @@ module.exports = {
     path: path.resolve(__dirname, 'public/dist'),
     filename: 'bundle.js',
   },
+  experiments: {
+    topLevelAwait: true
+  },
   // watch: true,
 };

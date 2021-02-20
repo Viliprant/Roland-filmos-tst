@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Viliprant/roland-filmos-tst#readme",
   "dependencies": {
+    "@babel/plugin-syntax-top-level-await": "^7.12.13",
     "@feathersjs/express": "^4.5.11",
     "@feathersjs/feathers": "^4.5.11",
     "@feathersjs/socketio": "^4.5.11",

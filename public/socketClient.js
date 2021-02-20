@@ -20,12 +20,9 @@ async function setSocketIOClient(){
       }
   });
 
-  console.log(getUsername());
-  console.log(getPayload());
-
   client.configure(socketio(socket));
 
   return client;
 }
 
-export default setSocketIOClient();
+export default await setSocketIOClient();
