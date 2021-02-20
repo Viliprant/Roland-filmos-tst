@@ -1,3 +1,5 @@
+const User = require('../../Models/User.js');
+
 module.exports = class UserService{
     constructor(){
         this.users = [];
@@ -8,10 +10,9 @@ module.exports = class UserService{
     }
     async get(id, params) {}
     async create(data, params) {
-        const user = {
-            username: data.username,
-            payload: data.payload
-        }
+        const id = data.payload;
+        
+        const user = new User(id, data.username)
 
         this.users.push(user);
 

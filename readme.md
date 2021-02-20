@@ -31,7 +31,7 @@ Jeu...
         - [x] Combien de joueur à chercher *(2, 4, 6 personnes)*
     - **Privée** :
         - [x] **ID** de la partie
-        - [] **Joueurs présents** dans le salon
+        - [x] **Joueurs présents** dans le salon
 - **Déroulement** de la partie :
     - [] Afficher un **nom d'acteur aléatoire**
     - [] **L'ordre des joueur** est déterminé **aléatoirement**
@@ -56,3 +56,5 @@ Jeu...
 - [] A la fin d'une partie
     - [] Supprimer le channel
     - [] Supprimer le game du service
+- [] User events
+    - [] Vérifier la synchro entre le front et le back sur les infos du user
