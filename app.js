@@ -68,14 +68,6 @@ app.service('games').hooks({
       }
     },
     after: {
-      create(context) {
-        const params = context.params;
-        if(Object.keys(params).length > 0){
-          context.app.channel(context.data.id).join(params.connection);  
-        }
-
-        return context;
-      },
       async get(context){
         const params = context.params;
         const data = context.result;
@@ -94,12 +86,19 @@ app.service('games').hooks({
               ...data,
               participants: [...data.participants, userID],
             })
+            context.app.channel(`game/${data.id}`).join(params.connection);  
           }
         }
 
         return context;
       }
     }
+});
+
+
+app.service('games').publish('updated', (data, context) => {
+  console.log(data);
+  return app.channel(`game/${data.id}`);
 });
 
 app.get('/', (req, res) => {

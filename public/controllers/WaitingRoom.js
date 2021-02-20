@@ -29,7 +29,8 @@ export default class WaitingRoom {
 
     handleWaitingRoom(){
         this.idPartyDOM.textContent = `#${this.game.id}`
-        console.log(this.game);
-        // SocketIOClient.service('games').
+        SocketIOClient.service('games').on('updated', (game) => {
+            console.log(game);
+        })
     }
 }
