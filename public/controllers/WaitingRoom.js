@@ -24,7 +24,11 @@ export default class WaitingRoom {
                 }
             })
 
-        this.homeButton.addEventListener('click', (evt) => redirect(evt, "#"), {once : true});
+        this.homeButton.addEventListener('click', (evt) => {
+            SocketIOClient.service('games').update(this.game.id , {isLeaving : true});
+
+            redirect(evt, "#");
+        }, {once : true});
     }
 
     handleWaitingRoom(){

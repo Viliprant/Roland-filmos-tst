@@ -97,6 +97,14 @@ app.service('games').hooks({
         }
 
         return context;
+      },
+      update(context) {
+        const userID = context.params.userID
+        if(context.data.isLeaving){
+          app.channel(`game/${context.id}`).leave(connection => {
+            return userID === connection.userID;
+          });
+        }
       }
     },
     after: {

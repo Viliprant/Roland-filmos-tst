@@ -20,12 +20,22 @@ module.exports = class GameService{
     }
     async update(id, data, params) {
         const game = this.games[id];
+        const userID = params.userID;
         
         if(game){
-            this.games[id] = {
-                ...game,
-                ...data,
-            };
+            if(data.isLeaving){
+                const updatedParticipants = game.participants.filter( participant => participant !== userID );
+                this.games[id] = {
+                    ...game,
+                    participants: updatedParticipants,
+                };
+            }
+            else{
+                this.games[id] = {
+                    ...game,
+                    ...data,
+                };
+            }
         }
 
         return this.games[id];
