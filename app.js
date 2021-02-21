@@ -36,12 +36,13 @@ app.configure(socketio((io) => {
   io.on('connection', (socket) => {
     socket.on('disconnect', async () => {
       const impactedGames = await app.service('games').RemoveParticipant(socket.feathers.userID);
+      
       for (const key in impactedGames) {
           const gameToUpdate = impactedGames[key];
-          
-          await app.service('games').update(gameToUpdate.id, gameToUpdate);
-      }
-      await app.service('users').remove(socket.feathers.userID);
+          const game = await app.service('games').update(gameToUpdate.id, gameToUpdate);
+      } 
+      
+      await app.service('users').remove(socket.feathers.userID, socket.id);
     })
   })
 }));
@@ -56,11 +57,6 @@ app.use('/games', new GameService());
 socketListeners(app);
 
 app.service('users').hooks({
-  before: {
-    async create(context){
-      // console.log(context);
-    }
-  },
   after: {
     async remove(context){
       if(context.result){

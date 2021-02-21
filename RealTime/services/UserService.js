@@ -22,11 +22,13 @@ module.exports = class UserService{
     }
     async update(id, data, params) {}
     async patch(id, data, params) {}
-    async remove(id, params) {
+    async remove(id, connectionID) {
         const removedUser = this.users[id];
-        if(removedUser){
-            this.users = this.users.filter( user => user.id !== id);
+
+        if(removedUser && removedUser.connectionID === connectionID){
+            delete this.users[id];
         }
+
         return removedUser;
     }
     setup(app, path) {}

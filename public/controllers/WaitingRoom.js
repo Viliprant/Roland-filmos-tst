@@ -16,7 +16,7 @@ export default class WaitingRoom {
         SocketIOClient.service('games').get(this.game.id)
             .then(game => {
                 if(game && !game.UnauthorizedAccess){
-                    console.log(game);
+                    console.log('init', game.participants);
                     this.game = game;
                     this.handleWaitingRoom();
                 }
@@ -31,7 +31,7 @@ export default class WaitingRoom {
     handleWaitingRoom(){
         this.idPartyDOM.textContent = `#${this.game.id}`
         SocketIOClient.service('games').on('updated', (game) => {
-            console.log(game);
+            console.log('update',game.participants);
         })
     }
 }

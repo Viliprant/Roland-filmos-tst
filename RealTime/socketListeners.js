@@ -22,7 +22,5 @@ module.exports =  (app) => {
                 connectionID
             });
         }
-        console.log(connectionID);
-        console.log( await app.service('users').get(userID));
     });
 }
