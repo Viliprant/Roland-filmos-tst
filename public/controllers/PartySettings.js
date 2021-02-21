@@ -61,6 +61,12 @@ export default class PartySettings {
     handleJoin(){
         this.formParty.style.display = "flex";
 
-        this.formParty.addEventListener('submit', (evt) => redirect(evt, "#/waitingroom/private/0000000000"), {once : true});
+        this.formParty.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+
+            const partyID = new FormData(evt.target).get('partyID');
+
+            redirect(evt, `#/waitingroom/private/${partyID}`)
+        }, {once : true});
     }
 }

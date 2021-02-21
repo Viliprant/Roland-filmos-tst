@@ -1,6 +1,5 @@
 import {redirect} from '../utilities/routerUtilities';
 import SocketIOClient from '../socketClient';
-import {getPayload} from '../utilities/localstorageUtilities';
 
 export default class WaitingRoom {
     constructor(type, id) {

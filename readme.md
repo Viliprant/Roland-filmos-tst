@@ -47,12 +47,12 @@ Jeu...
 - [x] **Créer** une partie privée
 - [x] **Rejoindre** une partie `privée`
     - [x] Créer un channel
-    - [] Supprimer les personnes déconnectés du channel et de la partie
+    - [x] Supprimer les personnes déconnectés du channel et de la partie
     - [] Adapter l'interface web
 - [] **Rejoindre** une partie `publique`
 - [x] **Vérifier** qui sont les destinataires des `events`
 - [] Elements imprévus
-    - [] Deconnexion User
+    - [x] Deconnexion User
     - [] Retour accueil User
 - [] A la fin d'une partie
     - [] Supprimer le channel
