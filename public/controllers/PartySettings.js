@@ -64,7 +64,7 @@ export default class PartySettings {
         this.formParty.addEventListener('submit', (evt) => {
             evt.preventDefault();
 
-            const partyID = new FormData(evt.target).get('partyID');
+            const partyID = new FormData(evt.target).get('partyID').toLowerCase();
 
             redirect(evt, `#/waitingroom/private/${partyID}`)
         }, {once : true});
