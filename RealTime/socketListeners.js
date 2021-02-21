@@ -11,7 +11,7 @@ module.exports =  (app) => {
         if(!isExisting){
             await app.service('users').create({
                 payload: userID,
-                username,
+                username,   
                 connectionID
             });
         }

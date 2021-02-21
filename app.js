@@ -76,8 +76,9 @@ app.service('users').hooks({
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
     return [
-        app.channel(app.channels).filter(connection =>
-            connection.payload === context.data.payload
+        app.channel(app.channels).filter(connection =>{
+          return connection.userID === context.data.payload
+        }
         )
     ];
 });

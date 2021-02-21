@@ -20,7 +20,13 @@ module.exports = class UserService{
 
         return newUser;
     }
-    async update(id, data, params) {}
+    async update(id, data, params) {
+        if(this.users[id]){
+            this.users[id].username = data.username;
+        }
+
+        return this.users[id];
+    }
     async patch(id, data, params) {}
     async remove(id, connectionID) {
         const removedUser = this.users[id];

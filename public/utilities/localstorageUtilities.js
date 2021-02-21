@@ -1,5 +1,3 @@
-import payload from 'string-random';
-
 export const getUsername = () => {
     return localStorage.getItem('username') || "Username"
 }

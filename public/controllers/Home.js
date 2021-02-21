@@ -1,6 +1,8 @@
 import Router from 'vanilla-router';
 import {redirect} from '../utilities/routerUtilities';
-import {getUsername, setUsername} from '../utilities/localstorageUtilities';
+import {getUsername, setUsername, getPayload} from '../utilities/localstorageUtilities';
+
+import SocketIOClient from '../socketClient';
 
 export default class Home {
     constructor() {
@@ -40,28 +42,29 @@ export default class Home {
         })
         this.usernameForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            const formData = new FormData(evt.currentTarget);
-
-            this.usernameSpan.style.display = 'block';
-            this.usernameForm.style.display = 'none';
-
-            this.username = formData.get('username').trim();
-            this.usernameSpan.textContent = this.username;
-
-            setUsername(this.username);
+            this.updateUsername(evt);
+            
         })
         this.usernameForm.addEventListener('focusout', (evt) => {
             evt.preventDefault();
             
-            const formData = new FormData(evt.currentTarget);
-
-            this.usernameSpan.style.display = 'block';
-            this.usernameForm.style.display = 'none';
-
-            this.username = formData.get('username').trim();
-            this.usernameSpan.textContent = this.username;
-
-            setUsername(this.username);
+            this.updateUsername(evt);
         })
+    }
+
+    async updateUsername(evt){
+        const formData = new FormData(evt.currentTarget);
+
+        this.usernameSpan.style.display = 'block';
+        this.usernameForm.style.display = 'none';
+
+        this.username = formData.get('username').trim();
+        this.usernameSpan.textContent = this.username;
+
+        setUsername(this.username);
+
+        const userID = getPayload() ? JSON.parse(getPayload()).id : null;
+
+        await SocketIOClient.service('users').update(userID, {username: this.username});
     }
 }
