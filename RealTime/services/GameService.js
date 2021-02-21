@@ -33,4 +33,24 @@ module.exports = class GameService{
     async patch(id, data, params) {}
     async remove(id, params) {}
     setup(app, path) {}
+
+    async RemoveParticipant(userID)
+    {
+        const impactedGames = [];
+        for (const key in this.games) {
+            const game = this.games[key];
+            const participantToRemove = game.participants.find( participant => participant === userID );
+            if(participantToRemove){
+                const updatedParticipants = game.participants.filter( participant => participant !== userID );
+                const updatedGame = {
+                    ...game,
+                    participants: updatedParticipants,
+                };
+
+                impactedGames.push(updatedGame);
+            }
+        }
+
+        return impactedGames;
+    }
 }

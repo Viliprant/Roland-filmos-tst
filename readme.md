@@ -45,8 +45,9 @@ Jeu...
 ## TODO:
 - [x] **Séparer** `SocketIO client` dans un fichier à part (factoriser)
 - [x] **Créer** une partie privée
-- [] **Rejoindre** une partie `privée`
+- [x] **Rejoindre** une partie `privée`
     - [x] Créer un channel
+    - [] Supprimer les personnes déconnectés du channel et de la partie
     - [] Adapter l'interface web
 - [] **Rejoindre** une partie `publique`
 - [x] **Vérifier** qui sont les destinataires des `events`
@@ -57,4 +58,7 @@ Jeu...
     - [] Supprimer le channel
     - [] Supprimer le game du service
 - [] User events
-    - [] Vérifier la synchro entre le front et le back sur les infos du user
+    - [] Vérifier la synchro USER
+        - [x] A l'initialisation de la page
+        - [] Au changement de nom
+        - [x] A la déconnexion

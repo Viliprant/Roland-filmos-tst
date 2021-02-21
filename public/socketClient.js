@@ -9,7 +9,16 @@ async function setSocketIOClient(){
 
   if(getPayload() == '')
   {
-    const id = await (await fetch(`${location.origin}/user`, {method: 'POST'})).json();
+    const id = await (await fetch(`${location.origin}/user`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: getUsername(),
+      }),
+    })).json();
     setPayload(id);
   }
 

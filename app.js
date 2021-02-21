@@ -25,11 +25,25 @@ app.configure(express.rest());
 // Configure Socket.io real-time APIs
 app.configure(socketio((io) => {
   io.use(function (socket, next) {
+    const userID = JSON.parse(socket.handshake.query.payload).id;
+
     socket.feathers.connectionID = socket.client.id;
-    socket.feathers.payload = socket.handshake.query.payload;
+    socket.feathers.userID = userID;
     socket.feathers.username = socket.handshake.query.username;
     next();
   });
+
+  io.on('connection', (socket) => {
+    socket.on('disconnect', async () => {
+      const impactedGames = await app.service('games').RemoveParticipant(socket.feathers.payload.id);
+      for (const key in impactedGames) {
+          const gameToUpdate = impactedGames[key];
+          
+          await app.service('games').update(gameToUpdate.id, gameToUpdate);
+      }
+      await app.service('users').remove(socket.feathers.payload.id);
+    })
+  })
 }));
 
 app.use(helmet());
@@ -41,6 +55,28 @@ app.use('/games', new GameService());
 
 socketListeners(app);
 
+app.service('users').hooks({
+  before: {
+    async create(context){
+      // console.log(context);
+    }
+  },
+  after: {
+    async remove(context){
+      if(context.result){
+        const userID = context.result.id;
+        const channels = context.app.channels;
+        if(channels.length > 0){
+          app.channel(channels).leave(connection => {
+              return userID === connection.payload.id;
+          });
+        }
+      }
+
+      return context;
+    }
+  }
+})
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
     return [
@@ -82,15 +118,14 @@ app.service('games').hooks({
             context.result = {UnauthorizedAccess: true};
           }
           else{
-
             context.result = await context.app.service('games').update(data.id, {
               ...data,
               participants: [...data.participants, userID],
             })
 
             const participants = context.result.participants;
-            console.log('participants', participants);
             const usernames = [];
+
             for (const userID of participants) {
                 const user = await context.app.service('users').get(userID);
                 if(user){
@@ -111,11 +146,10 @@ app.service('games').hooks({
       },
       async update(context){
         const data = context.result;
-        const participants = context.result.participants;
+        const participants = data.participants;
         const usernames = [];
 
         const {authorizedIDs, ...safeData} = data;
-
 
         for (const userID of participants) {
             const user = await context.app.service('users').get(userID);
@@ -132,7 +166,6 @@ app.service('games').hooks({
     }
 });
 
-
 app.service('games').publish('updated', (data, context) => {
   return app.channel(`game/${data.id}`);
 });
@@ -142,8 +175,10 @@ app.get('/', (req, res) => {
 })
 app.post('/user', async (req, res) => {
   const id = random(10);
+  const username = req.body.username;
   const newUser = await app.service('users').create({
-      payload: id
+      payload: id,
+      username
   });
   res.json({id: newUser.id});
 })

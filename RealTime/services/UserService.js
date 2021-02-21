@@ -14,7 +14,7 @@ module.exports = class UserService{
     async create(data, params) {
         const id = data.payload;
 
-        const newUser = new User(id, data.username)
+        const newUser = new User(id, data.username, data.connectionID)
 
         this.users[id] = newUser;
 
@@ -22,6 +22,12 @@ module.exports = class UserService{
     }
     async update(id, data, params) {}
     async patch(id, data, params) {}
-    async remove(id, params) {}
+    async remove(id, params) {
+        const removedUser = this.users[id];
+        if(removedUser){
+            this.users = this.users.filter( user => user.id !== id);
+        }
+        return removedUser;
+    }
     setup(app, path) {}
 }
