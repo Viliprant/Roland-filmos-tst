@@ -11,12 +11,13 @@ export default class WaitingRoom {
     init() {
         this.homeButton = document.querySelector("#top-left-button");
         this.idPartyDOM = document.querySelector("#id-party");
+        this.wrapperParticipants = document.querySelector("#participants");
 
         SocketIOClient.service('games').get(this.game.id)
             .then(game => {
                 if(game && !game.UnauthorizedAccess){
-                    console.log('init', game.participants);
                     this.game = game;
+                    game.participants.forEach(participant => this.updateDOM(participant));
                     this.handleWaitingRoom();
                 }
                 else{
@@ -34,7 +35,20 @@ export default class WaitingRoom {
     handleWaitingRoom(){
         this.idPartyDOM.textContent = `#${this.game.id}`
         SocketIOClient.service('games').on('updated', (game) => {
-            console.log('update',game.participants);
+            this.wrapperParticipants.innerHTML = '';
+            game.participants.forEach(participant => this.updateDOM(participant));
         })
+    }
+
+    updateDOM(username){
+        const wrapperUser = document.createElement('div');
+        wrapperUser.classList.add('participant');
+        
+        const usernameDOM = document.createElement('div');
+        usernameDOM.classList.add('username');
+        usernameDOM.textContent = username;
+
+        wrapperUser.append(usernameDOM);
+        this.wrapperParticipants.append(wrapperUser);
     }
 }
