@@ -35,13 +35,13 @@ app.configure(socketio((io) => {
 
   io.on('connection', (socket) => {
     socket.on('disconnect', async () => {
-      const impactedGames = await app.service('games').RemoveParticipant(socket.feathers.payload.id);
+      const impactedGames = await app.service('games').RemoveParticipant(socket.feathers.userID);
       for (const key in impactedGames) {
           const gameToUpdate = impactedGames[key];
           
           await app.service('games').update(gameToUpdate.id, gameToUpdate);
       }
-      await app.service('users').remove(socket.feathers.payload.id);
+      await app.service('users').remove(socket.feathers.userID);
     })
   })
 }));
@@ -68,7 +68,7 @@ app.service('users').hooks({
         const channels = context.app.channels;
         if(channels.length > 0){
           app.channel(channels).leave(connection => {
-              return userID === connection.payload.id;
+              return userID === connection.userID;
           });
         }
       }
@@ -94,7 +94,7 @@ app.service('games').hooks({
             const id = random(process.env.NB_STR_ID).toLowerCase();
             context.data = {
                 id,
-                owner: params.payload.id,
+                owner: params.userID,
                 nbMaxPlayers: process.env.NB_PLAYER_MAX,
                 type: 'private',
             }
@@ -107,7 +107,7 @@ app.service('games').hooks({
       async get(context){
         const params = context.params;
         const data = context.result;
-        const userID = params.payload.id;
+        const userID = params.userID;
 
         if(data){
           const isAlreadyInGame = data.participants.find( participant => participant === userID);
