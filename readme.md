@@ -32,15 +32,6 @@ Jeu...
     - **Privée** :
         - [x] **ID** de la partie
         - [x] **Joueurs présents** dans le salon
-- **Déroulement** de la partie :
-    - [] Afficher un **nom d'acteur aléatoire**
-    - [] **L'ordre des joueur** est déterminé **aléatoirement**
-    - [] **Phase** de jeu :
-        - [] **Input**
-        - [] **Validation**
-        - [] **Attente** de son tour
-        - [] **Perdu**
-        - [] **Gagné**
 
 ## TODO:
 - [x] **Séparer** `SocketIO client` dans un fichier à part (factoriser)
@@ -48,17 +39,36 @@ Jeu...
 - [x] **Rejoindre** une partie `privée`
     - [x] Créer un channel
     - [x] Supprimer les personnes déconnectés du channel et de la partie
-    - [] Adapter l'interface web
-- [] **Rejoindre** une partie `publique`
+    - [x] Adapter l'interface web
 - [x] **Vérifier** qui sont les destinataires des `events`
-- [] Elements imprévus
+- [x] Elements imprévus
     - [x] Deconnexion User
-    - [] Retour accueil User
-- [] A la fin d'une partie
-    - [] Supprimer le channel
-    - [] Supprimer le game du service
-- [] User events
-    - [] Vérifier la synchro USER
+    - [x] Retour accueil User
+- [x] User events
+    - [x] Vérifier la synchro USER
         - [x] A l'initialisation de la page
-        - [] Au changement de nom
+        - [x] Au changement de nom
         - [x] A la déconnexion
+
+- [] **Lancer** une partie `privée`
+    - [] **Ajouter** le bouton `jouer`
+    - [] **Verouiller** la partie
+    - [] **Ajouter** les participants dans les `authorizedIDs`
+    - [] **Créer** les pages de la partie
+    - [] **Requêter** l'`API`
+    - [] **Créer** l'algo du jeu :DD
+        - **Déroulement** de la partie :
+            - [] Afficher un **nom d'acteur aléatoire**
+            - [] **L'ordre des joueur** est déterminé **aléatoirement**
+            - [] **Phase** de jeu :
+                - [] **Input** + **image** du précédent acteur
+                - [] **Validation**
+                - [] **Attente** de son tour
+                - [] **Perdu**
+                - [] **Gagné**
+
+- [] A la **fin** d'une partie
+    - [] **Supprimer** le channel
+    - [] **Supprimer** le game du service
+- [] **Créer** une partie `publique`
+- [] **Rejoindre** une partie `publique`
