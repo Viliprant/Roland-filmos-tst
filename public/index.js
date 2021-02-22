@@ -3,6 +3,7 @@ import Home from './controllers/Home';
 import PartySettings from './controllers/PartySettings';
 import Game from './controllers/Game';
 import WaitingRoom from './controllers/WaitingRoom';
+import SocketIOClient from './socketClient';
 
 // MOBILE HEIGHT (URL BAR)
 const appli = document.querySelector("#app");
@@ -21,8 +22,16 @@ myRouter.add('/partysettings/(:any)', function (param) {
     dispatchRoute(new PartySettings(param));
 });
 /* Waiting Room */
-myRouter.add('/waitingroom/(:any)/(:any)', function (type, param) {
-    dispatchRoute(new WaitingRoom(type, param));
+myRouter.add('/waitingroom/(:any)/(:any)', function (type, id) {
+    SocketIOClient.service('games').get(id)
+        .then(game => {
+            if(game && !game.UnauthorizedAccess){
+                dispatchRoute(new WaitingRoom(type, game));
+            }
+            else{
+                window.location = '#/partysettings/partytype';
+            }
+        })
 });
 /* Lobby */
 myRouter.add('/game', function () {
