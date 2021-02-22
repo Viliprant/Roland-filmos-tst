@@ -1,10 +1,14 @@
 export default class Game {
-    constructor() {
+    constructor(states) {
         const path = 'gameStates'
         this.view = `${path}/typeActorName.html`;
+        this.states = states;
     }
 
     init() {
-        console.log('Game')
+        console.log(this.states);
+
+        //TODO: Ecouter les évènements des updates
+        //TODO: Mettre à jour le DOM en fonction du tours des joueurs
     }
 }

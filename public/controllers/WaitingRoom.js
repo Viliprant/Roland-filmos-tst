@@ -21,9 +21,10 @@ export default class WaitingRoom {
             redirect(evt, "#");
         }, {once : true});
 
+        // TODO: UNIQUEMENT le owner
+        // TODO: ENVOYER UN MESSAGE AUX AUTRES JOUEUR POUR REJOINDRE LA PARTIE
         this.startGameButton.addEventListener('click', (evt) => {
             evt.preventDefault();
-            console.log(this.game);
             if (this.game.participants.length > 1) {
                 window.location = `#/game/${this.game.id}`
             }

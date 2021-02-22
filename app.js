@@ -34,6 +34,7 @@ require('dotenv').config()
 
 app.use('/users', new UserService());
 app.use('/games', new GameService());
+//TODO: Create GameStatesService
 
 socketListeners(app);
 

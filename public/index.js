@@ -1,7 +1,7 @@
 import Router from 'vanilla-router';
 import Home from './controllers/Home';
 import PartySettings from './controllers/PartySettings';
-import Game from './controllers/GameStates';
+import GameStates from './controllers/GameStates';
 import WaitingRoom from './controllers/WaitingRoom';
 import SocketIOClient from './socketClient';
 
@@ -36,7 +36,13 @@ myRouter.add('/waitingroom/(:any)/(:any)', function (type, id) {
 /* Lobby */
 myRouter.add('/game/(:any)', function (id) {
     console.log(id);
-    dispatchRoute(new Game());
+    // TODO: Vérifier si la partie existe
+    // TODO: Vérifier si la partie est bien LOCK
+    // TODO: Vérifier l'authorisation
+    // TODO: Vérifier si le participant est déjà présent
+    // TODO: Récupérer le GameStates
+
+    dispatchRoute(new GameStates());
 });
 
 myRouter.addUriListener();
