@@ -1,7 +1,7 @@
 import Router from 'vanilla-router';
 import Home from './controllers/Home';
 import PartySettings from './controllers/PartySettings';
-import Game from './controllers/Game';
+import Game from './controllers/GameStates';
 import WaitingRoom from './controllers/WaitingRoom';
 import SocketIOClient from './socketClient';
 
@@ -34,7 +34,8 @@ myRouter.add('/waitingroom/(:any)/(:any)', function (type, id) {
         })
 });
 /* Lobby */
-myRouter.add('/game', function () {
+myRouter.add('/game/(:any)', function (id) {
+    console.log(id);
     dispatchRoute(new Game());
 });
 

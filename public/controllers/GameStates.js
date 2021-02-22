@@ -1,6 +1,7 @@
 export default class Game {
     constructor() {
-        this.view = 'game.html';
+        const path = 'gameStates'
+        this.view = `${path}/typeActorName.html`;
     }
 
     init() {

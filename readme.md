@@ -63,7 +63,7 @@ Jeu...
             - [] **Phase** de jeu :
                 - [] **Input** + **image** du précédent acteur
                 - [] **Validation**
-                - [] **Attente** de son tour
+                - [] **Attente** de son tour    
                 - [] **Perdu**
                 - [] **Gagné**
 

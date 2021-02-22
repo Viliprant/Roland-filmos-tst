@@ -18,9 +18,16 @@ export default class WaitingRoom {
 
         this.homeButton.addEventListener('click', (evt) => {
             SocketIOClient.service('games').update(this.game.id , {isLeaving : true});
-
             redirect(evt, "#");
         }, {once : true});
+
+        this.startGameButton.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            console.log(this.game);
+            if (this.game.participants.length > 1) {
+                window.location = `#/game/${this.game.id}`
+            }
+        });
     }
 
     handleWaitingRoom(){
@@ -29,6 +36,7 @@ export default class WaitingRoom {
 
 
         SocketIOClient.service('games').on('updated', (game) => {
+            this.game = game;
             this.wrapperParticipants.innerHTML = '';
             game.participants.forEach(participant => this.updateDOM(participant));
         })
