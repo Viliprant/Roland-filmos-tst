@@ -12,6 +12,7 @@ export default class WaitingRoom {
         this.homeButton = document.querySelector("#top-left-button");
         this.idPartyDOM = document.querySelector("#id-party");
         this.wrapperParticipants = document.querySelector("#participants");
+        this.startGameButton = document.querySelector("#start-game");
 
         this.handleWaitingRoom();
 

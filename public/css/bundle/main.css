@@ -64,8 +64,8 @@ button#top-left-button > span.material-icons {
 }
 
 button:active, button input[type="submit"]:active {
-  -webkit-box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12);
-          box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12);
+  -webkit-box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12) !important;
+          box-shadow: inset 2px 2px 0 2px rgba(0, 0, 0, 0.12) !important;
 }
 
 button + button {
@@ -315,6 +315,7 @@ ul {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 1rem;
+  height: 100%;
 }
 
 #waiting-room #id-party {
@@ -325,17 +326,32 @@ ul {
 }
 
 #waiting-room #participants {
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 2rem;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
   -ms-grid-columns: (minmax(47%, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(47%, 1fr));
   gap: 2rem;
   width: 100%;
-  height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: inherit;
+  overflow-x: hidden;
+  overflow-y: visible;
+  -webkit-box-shadow: inset 0 1px 2rem rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0 1px 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 #waiting-room #participants .participant {
@@ -349,6 +365,8 @@ ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 90%;
+  height: 10vh;
   background-color: white;
   padding: 1rem;
   -webkit-box-shadow: 2px 5px 0 2px rgba(0, 0, 0, 0.12);
@@ -364,4 +382,21 @@ ul {
 
 #waiting-room #participants .participant .username {
   font-size: 1.6rem;
+}
+
+#waiting-room button {
+  margin-bottom: 1rem;
+  position: relative;
+  background-color: #7bc043;
+  color: white;
+  font-weight: bold;
+  padding: 1rem;
+  font-size: 1.4rem;
+  -webkit-box-shadow: 2px 5px 0 2px rgba(123, 192, 67, 0.8), 2px 5px 0 2px black;
+          box-shadow: 2px 5px 0 2px rgba(123, 192, 67, 0.8), 2px 5px 0 2px black;
+}
+
+#waiting-room button:active {
+  -webkit-box-shadow: inset 2px 5px 0 1px rgba(123, 192, 67, 0.8), inset 2px 5px 0 1px black;
+          box-shadow: inset 2px 5px 0 1px rgba(123, 192, 67, 0.8), inset 2px 5px 0 1px black;
 }

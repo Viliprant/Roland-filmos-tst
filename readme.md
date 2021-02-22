@@ -51,7 +51,7 @@ Jeu...
         - [x] A la déconnexion
 
 - [] **Lancer** une partie `privée`
-    - [] **Ajouter** le bouton `jouer`
+    - [x] **Ajouter** le bouton `jouer`
     - [] **Verouiller** la partie
     - [] **Ajouter** les participants dans les `authorizedIDs`
     - [] **Créer** les pages de la partie
