@@ -61,6 +61,8 @@ export default class PartySettings {
     handleJoin(){
         this.formParty.style.display = "flex";
 
+        this.formParty.querySelector('#id-party').focus();
+
         this.formParty.addEventListener('submit', (evt) => {
             evt.preventDefault();
 
