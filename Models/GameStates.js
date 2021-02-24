@@ -8,4 +8,8 @@ module.exports = class GameStates{
         this.mentionnedActors = [firstActor];
         this.currentPlayer = 0;
     }
+
+    init(){
+        
+    }
 }

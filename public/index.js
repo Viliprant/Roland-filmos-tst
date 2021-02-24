@@ -41,7 +41,6 @@ myRouter.add('/game/(:any)', function (id) {
     // TODO: Vérifier l'authorisation
     // TODO: Vérifier si le participant est déjà présent
     // TODO: Récupérer le GameStates
-
     dispatchRoute(new GameStates());
 });
 
