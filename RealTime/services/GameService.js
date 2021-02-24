@@ -30,17 +30,27 @@ module.exports = class GameService{
                     participants: updatedParticipants,
                 };
             }
-            else{
+            else if(data.isLocked && game.participants.length > 1){
                 this.games[id] = {
                     ...game,
-                    ...data,
+                    authorizedIDs: game.participants,
+                    isLocked: true,
                 };
             }
+            else{
+                if(!game.isLocked){
+                    this.games[id] = {
+                        ...game,
+                        participants: data.participants || game.participants,
+                    };
+                }
+            }
         }
-
         return this.games[id];
     }
-    async patch(id, data, params) {}
+    async patch(id, data, params) {
+        return this.games[id];
+    }
     async remove(id, params) {}
     setup(app, path) {}
 

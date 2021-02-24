@@ -17,14 +17,17 @@ const gameHook = (app) => {
     
             return context;
           },
-          update(context) {
-            const userID = context.params.userID
-            if(context.data.isLeaving){
-              app.channel(`game/${context.id}`).leave(connection => {
-                return userID === connection.userID;
-              });
+          update: [
+            (context) => {
+              const userID = context.params.userID
+              if(context.data.isLeaving){
+                app.channel(`game/${context.id}`).leave(connection => {
+                  return userID === connection.userID;
+                });
+              }
+              return context;
             }
-          }
+          ]
         },
         after: {
           async get(context){
@@ -67,25 +70,43 @@ const gameHook = (app) => {
               }
             }
           },
-          async update(context){
-            const data = context.result;
-            const participants = data.participants;
-            const usernames = [];
-    
-            const {authorizedIDs, ...safeData} = data;
-    
-            for (const userID of participants) {
-                const user = await context.app.service('users').get(userID);
-                if(user){
-                  usernames.push(user.username);
+          update: [ 
+            async (context) => {
+              const data = context.data;
+              const result = context.result;
+              const userID = context.params.userID;
+
+              if(data.isLocked){
+                if(!result.owner === userID){
+                  context.result = {
+                    ...result,
+                    isLocked: false,
+                  };
                 }
-            }
-    
-            context.dispatch = {
-              ...safeData,
-              participants: usernames,
-            };
-          }
+              }
+
+              return context;
+            },
+            async (context) => {
+              const data = context.result;
+              const participants = data.participants;
+              const usernames = [];
+      
+              const {authorizedIDs, ...safeData} = data;
+      
+              for (const userID of participants) {
+                  const user = await context.app.service('users').get(userID);
+                  if(user){
+                    usernames.push(user.username);
+                  }
+              }
+      
+              context.dispatch = {
+                ...safeData,
+                participants: usernames,
+              };
+            },
+          ]
         }
     }
 }

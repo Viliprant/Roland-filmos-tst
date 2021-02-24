@@ -341,7 +341,6 @@ ul {
   padding: 1rem;
   -ms-grid-columns: (minmax(47%, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(47%, 1fr));
-  gap: 2rem;
   width: 100%;
   -webkit-box-flex: 1;
       -ms-flex: 1;
@@ -355,6 +354,7 @@ ul {
 }
 
 #waiting-room #participants .participant {
+  margin-top: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -387,16 +387,20 @@ ul {
 #waiting-room button {
   margin-bottom: 1rem;
   position: relative;
-  background-color: #7bc043;
-  color: white;
   font-weight: bold;
   padding: 1rem;
   font-size: 1.4rem;
+  color: grey;
+}
+
+#waiting-room button.has-permission {
+  color: white;
+  background-color: #7bc043;
   -webkit-box-shadow: 2px 5px 0 2px rgba(123, 192, 67, 0.8), 2px 5px 0 2px black;
           box-shadow: 2px 5px 0 2px rgba(123, 192, 67, 0.8), 2px 5px 0 2px black;
 }
 
-#waiting-room button:active {
+#waiting-room button.has-permission:active {
   -webkit-box-shadow: inset 2px 5px 0 1px rgba(123, 192, 67, 0.8), inset 2px 5px 0 1px black;
           box-shadow: inset 2px 5px 0 1px rgba(123, 192, 67, 0.8), inset 2px 5px 0 1px black;
 }

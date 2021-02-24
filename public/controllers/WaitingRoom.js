@@ -1,4 +1,5 @@
 import {redirect} from '../utilities/routerUtilities';
+import {getPayload} from '../utilities/localstorageUtilities';
 import SocketIOClient from '../socketClient';
 
 export default class WaitingRoom {
@@ -9,6 +10,8 @@ export default class WaitingRoom {
     }
 
     init() {
+        const localUserID = JSON.parse(getPayload()).id;
+
         this.homeButton = document.querySelector("#top-left-button");
         this.idPartyDOM = document.querySelector("#id-party");
         this.wrapperParticipants = document.querySelector("#participants");
@@ -21,14 +24,20 @@ export default class WaitingRoom {
             redirect(evt, "#");
         }, {once : true});
 
-        // TODO: UNIQUEMENT le owner
-        // TODO: ENVOYER UN MESSAGE AUX AUTRES JOUEUR POUR REJOINDRE LA PARTIE
-        this.startGameButton.addEventListener('click', (evt) => {
-            evt.preventDefault();
-            if (this.game.participants.length > 1) {
-                window.location = `#/game/${this.game.id}`
-            }
-        });
+        if(this.game.owner === localUserID)
+        {
+            this.startGameButton.classList.add('has-permission');
+            this.startGameButton.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                if (this.game.participants.length > 1) {
+                    SocketIOClient.service('games').update(this.game.id, {
+                        isLocked: true,
+                    })
+                }
+            });
+        }
+
+        
     }
 
     handleWaitingRoom(){
@@ -37,6 +46,9 @@ export default class WaitingRoom {
 
 
         SocketIOClient.service('games').on('updated', (game) => {
+            if (game.isLocked) {
+                window.location = `#/game/${game.id}`;
+            }
             this.game = game;
             this.wrapperParticipants.innerHTML = '';
             game.participants.forEach(participant => this.updateDOM(participant));

@@ -12,21 +12,25 @@ export default class Game {
         
         console.log(this.states);
 
-        if(this.isDefeated()){
+        this.handleGameStates();
 
-        }
-        else{
-            if(this.isHisTurn()){
-                
-            }
-            else{
-
-            }
-        }
         //TODO: Ecouter les évènements des updates
         //TODO: Mettre à jour le DOM en fonction du tours des joueurs
     }
 
+    handleGameStates(){
+        if(this.isDefeated()){
+            console.log('defeat');
+        }
+        else{
+            if(this.isHisTurn()){
+                console.log('your turn');
+            }
+            else{
+                console.log('waiting something');
+            }
+        }
+    }
     isHisTurn(){
         return true;
     }

@@ -50,6 +50,7 @@ app.service('users').publish('created', (data, context) => {
     )
   ];
 });
+
 app.service('games').publish('updated', (data, context) => {
   return app.channel(`game/${data.id}`);
 });
