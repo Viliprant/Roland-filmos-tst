@@ -52,9 +52,9 @@ Jeu...
 
 - [] **Lancer** une partie `privée`
     - [x] **Ajouter** le bouton `jouer`
-    - [] **Verouiller** la partie
-    - [] **Ajouter** les participants dans les `authorizedIDs`
-    - [] **Créer** les pages de la partie
+    - [x] **Verouiller** la partie
+    - [x] **Ajouter** les participants dans les `authorizedIDs`
+    - [x] **Créer** les pages de la partie
     - [] **Requêter** l'`API`
     - [] **Créer** l'algo du jeu :DD
         - **Déroulement** de la partie :
