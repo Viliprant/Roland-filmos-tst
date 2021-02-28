@@ -33,7 +33,6 @@ module.exports = class GameService{
             else if(data.isLocked && game.participants.length > 1){
                 this.games[id] = {
                     ...game,
-                    authorizedIDs: game.participants,
                     isLocked: true,
                 };
             }
@@ -46,6 +45,7 @@ module.exports = class GameService{
                 }
             }
         }
+
         return this.games[id];
     }
     async patch(id, data, params) {

@@ -35,13 +35,16 @@ myRouter.add('/waitingroom/(:any)/(:any)', function (type, id) {
 });
 /* Lobby */
 myRouter.add('/game/(:any)', function (id) {
-    console.log(id);
-    // TODO: Vérifier si la partie existe
-    // TODO: Vérifier si la partie est bien LOCK
-    // TODO: Vérifier l'authorisation
     // TODO: Vérifier si le participant est déjà présent
-    // TODO: Récupérer le GameStates
-    dispatchRoute(new GameStates());
+    SocketIOClient.service('gameStates').get(id)
+        .then(gameStates => {
+            if(gameStates && !gameStates.UnauthorizedAccess){
+                dispatchRoute(new GameStates(gameStates));
+            }
+            else{
+                window.location = '#/partysettings/partytype';
+            }
+        })
 });
 
 myRouter.addUriListener();

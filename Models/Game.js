@@ -5,7 +5,6 @@ module.exports = class Game{
         this.type = type;
         this.nbMaxPlayers = nbMaxPlayers;
         this.participants = [];
-        this.authorizedIDs = [owner];
         this.isLocked = false;
     }
 }

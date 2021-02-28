@@ -3,13 +3,11 @@ module.exports = class GameStates{
         this.id = id;
         this.status = 'running';
         // TODO: Mélanger les joueurs
-        this.players = players; // IDs array
+        this.players = [...players]; // IDs array
+        this.authorizedIDs = [...players];
         this.loosers = [];
         this.mentionnedActors = [firstActor];
         this.currentPlayer = 0;
-    }
-
-    init(){
-        
+        this.isCorrectActor = null;
     }
 }

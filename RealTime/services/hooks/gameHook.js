@@ -37,11 +37,11 @@ const gameHook = (app) => {
     
             if(data){
               const isAlreadyInGame = data.participants.find( participant => participant === userID);
-              const isFull = data.authorizedIDs.length >= data.nbMaxPlayers;
-    
+              const isFull = data.participants.length >= data.nbMaxPlayers;
+
               if(isAlreadyInGame || isFull)
               {
-                context.result = {UnauthorizedAccess: true};
+                context.dispatch = {UnauthorizedAccess: true};
               }
               else{
                 context.result = await context.app.service('games').update(data.id, {
@@ -82,6 +82,13 @@ const gameHook = (app) => {
                     ...result,
                     isLocked: false,
                   };
+                }
+                else{
+                  context.app.service('gameStates').create({
+                    id: result.id,
+                    players: [...result.participants],
+                    firstActor: 'Brad Pitt', //TODO: Dynamique via l'API
+                  })
                 }
               }
 

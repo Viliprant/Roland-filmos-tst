@@ -7,10 +7,12 @@ var cors = require('cors');
 const socketListeners = require('./RealTime/socketListeners.js');
 
 const SocketIOConfiguration = require('./RealTime/SocketIOConfiguration.js');
-const UserService = require('./RealTime/services/UserService.js')
+const UserService = require('./RealTime/services/UserService.js');
 const GameService = require('./RealTime/services/GameService.js');
-const userHook = require('./RealTime/services/hooks/userHook.js')
-const gameHook = require('./RealTime/services/hooks/gameHook.js')
+const GameStatesService = require('./RealTime/services/GameStatesService.js');
+const userHook = require('./RealTime/services/hooks/userHook.js');
+const gameHook = require('./RealTime/services/hooks/gameHook.js');
+const gameStatesHook = require('./RealTime/services/hooks/gameStatesHook.js');
 
 const random  = require('string-random');
 
@@ -34,12 +36,14 @@ require('dotenv').config()
 
 app.use('/users', new UserService());
 app.use('/games', new GameService());
+app.use('/gameStates', new GameStatesService());
 //TODO: Create GameStatesService
 
 socketListeners(app);
 
 app.service('users').hooks(userHook(app));
 app.service('games').hooks(gameHook(app));
+app.service('gameStates').hooks(gameStatesHook(app));
 
 // Envoie uniquement à la personne connectée
 app.service('users').publish('created', (data, context) => {
